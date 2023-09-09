@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Create new topic {% endblock %}
+{% block content %}
+<div class="container">
+    <form action="{% url 'add_topic' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p><button type="submit" class="btn btn-primary">Create</button> <a class="btn btn-secondary" href="/" role="button">Cancel</a></p>
+</form>
+</div>
+{% endblock %}

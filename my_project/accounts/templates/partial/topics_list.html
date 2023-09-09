@@ -1,0 +1,16 @@
+{% for topic1 in user.topic %}
+        <div class="row mt-5">
+                <div class="col-3">
+                    <a href="{% url 'detail_topic' topic.id %}">{{topic1.title}}</a>
+                </div>
+                <div class="col-4">
+                    <a href="{% url 'detail_topic' topic.id %}">{{topic1.created_at}}</a>
+                </div>
+                <div class="col-3">
+                    <a href="{% url 'detail_topic' topic.id %}">{{topic.author.username}}</a>
+                </div>
+                <div class="col-2">
+                    <a href="{% url 'detail_topic' topic.id %}">{{topic.comment.count}}</a>
+                </div>
+        </div>
+        {% endfor %}

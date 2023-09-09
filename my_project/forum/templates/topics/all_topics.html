@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Topics {% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% include 'partial/search_form.html' %}
+    </div>
+    <div class="row">
+        {% if not topics %}
+        {% include 'partial/404_page_not_found.html' %}
+        {% endif %}
+        {% for topic in topics %}
+        <div class="row mt-5">
+                <div class="col-3">
+                    <a href="{% url 'detail_topic' topic.id %}">{{topic.title}}</a>
+                </div>
+                <div class="col-4">
+                    <a href="{% url 'detail_topic' topic.id %}">{{topic.created_at}}</a>
+                </div>
+                <div class="col-3">
+                    <a href="{% url 'detail_topic' topic.id %}">{{topic.author.username}}</a>
+                </div>
+                <div class="col-2">
+                    <a href="{% url 'detail_topic' topic.id %}">{{topic.comment.count}}</a>
+                </div>
+        </div>
+        {% endfor %}
+
+    </div>
+    <div class="row mt-5">
+        {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+

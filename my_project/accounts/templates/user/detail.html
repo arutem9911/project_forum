@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title  %} Cabinet {% endblock %}
+
+
+
+{% block content  %}
+<div class="container">
+    <h1> {{request.user.username}}'s wild user page </h1>
+    {% if user.profile.avatar %}
+    <img src="{{user.profile.avatar.url}}" width="300" height="300" alt="user avatar">
+    <p><b>Username:</b> {{ request.user.username }} </p>
+    <p><b>Birth Date:</b> {{ request.user.profile.birth_date }} </p>
+    <p><b>Message quantity:</b> {{ request.user.comments.all.count }} </p>
+
+
+    <h3>Author's topics</h3>
+    <div class="row">
+        {% if not topics %}
+        {% include 'partial/404_page_not_found.html' %}
+        {% endif %}
+        {% for topic in topics %}
+        <div class="row mt-5">
+                <div class="col-3">
+                    <a href="{% url 'detail_topic' topic.id %}">{{topic.title}}</a>
+                </div>
+                <div class="col-4">
+                    <a href="{% url 'detail_topic' topic.id %}">{{topic.created_at}}</a>
+                </div>
+                <div class="col-3">
+                    <a href="{% url 'detail_topic' topic.id %}">{{topic.author.username}}</a>
+                </div>
+                <div class="col-2">
+                    <a href="{% url 'detail_topic' topic.id %}">{{topic.comment.count}}</a>
+                </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+
+{% endif %}
+{% endblock %}
